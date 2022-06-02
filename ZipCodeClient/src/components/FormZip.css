@@ -1,0 +1,24 @@
+.Container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #ffff;
+    padding: 24px;
+}
+
+.Title{
+    color: #2BB880 ;
+}
+
+.ContainerButton{
+    text-align: right;
+}
+
+.Button{
+    margin: 8px!important;
+}
+
+.Error{
+    color: red;
+}
