@@ -5,7 +5,8 @@ import {
 } from '@mui/material/';
 import './FormZip.css';
 import {ApolloClient, gql, InMemoryCache} from '@apollo/client';
-import Place from './Place';
+import Results from './Results'
+import History from "./History";
 
 interface Country {
     code: string,
@@ -133,7 +134,7 @@ function FormZip() {
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <FormControl>
+                        <FormControl fullWidth>
                             <InputLabel id="country-label">Country</InputLabel>
                             <Select
                                 value={country}
@@ -149,7 +150,7 @@ function FormZip() {
                         </FormControl>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField id="zip-code"
+                        <TextField id="zip-code" fullWidth
                                    label="Zip code" variant="outlined"
                                    required
                                    value={zipCode}
@@ -170,33 +171,10 @@ function FormZip() {
                         </Button>
                     </Grid>
                     <Grid item xs={12}>
-                        {(data || error) ? <Typography variant={'h4'} className={'Title'}>Results:</Typography> : null}
-                        <ul>
-                            {
-                                data.map(item => {
-                                    return (
-                                        <Place key={item.place_name} place={item}/>
-                                    )
-                                })
-                            }
-                        </ul>
-                        {
-                            error && <Typography className={'Error'}>{`Error, try another zip code for ${country} country`} </Typography>
-                        }
+                        <Results data={data} error={error} country={country}/>
                     </Grid>
                     <Grid item xs={12}>
-                        {history ? <Typography variant={'h4'} className={'Title'}>History:</Typography> : null}
-                        <ul>
-                            {
-                                history.map((item:any) => {
-                                    return (
-                                        <div key={item.index}>
-                                            <Typography>{`Zip Code: ${item.zipCode} State: ${item.state} City: ${item.city} `}</Typography>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </ul>
+                       <History history={history}/>
                     </Grid>
                 </Grid>
             </Paper>
